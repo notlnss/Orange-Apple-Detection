@@ -61,7 +61,7 @@ def render_result(image: Image.Image, filename: str):
             f"⚠️ Model kurang yakin (confidence {confidence * 100:.2f}%). "
             "Gambar mungkin bukan apple/orange, atau kualitas gambar kurang jelas."
         )
-        st.info(f"Prediksi tetap ditampilkan: **{pred_class.upper()}** (dengan keraguan)")
+        st.info(f"Prediksi : **{pred_class.upper()}**")
     else:
         st.success(f"Prediksi: **{pred_class.upper()}**")
 
