@@ -34,7 +34,7 @@ def preprocess_image(image: Image.Image) -> np.ndarray:
 
 
 def main():
-    st.title("🍎🍊 Klasifikasi Buah: Apple vs Orange")
+    st.title("🍎🍊 Klasifikasi Buah Apple & Orange")
     st.write(
         "Upload gambar buah, model akan memprediksi apakah itu **apple** atau **orange** "
         "menggunakan MobileNetV2 Transfer Learning."
