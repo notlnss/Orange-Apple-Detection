@@ -16,8 +16,6 @@ MAX_FILE_SIZE_MB = 5
 # Metrik dari notebook (hasil evaluate_model di test set)
 MODEL_METRICS = {
     "Arsitektur": "MobileNetV2 (Transfer Learning)",
-    "Accuracy": "0.9391",
-    "F1 Score": "0.9391",
 }
 
 st.set_page_config(page_title="Klasifikasi Buah", page_icon="🍎", layout="centered")
