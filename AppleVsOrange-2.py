@@ -10,7 +10,7 @@ from tensorflow import keras
 MODEL_PATH = "final_best_model.keras"
 IMG_SIZE = 128
 CLASS_NAMES = ["apple", "orange"]  # urutan sesuai sorted(os.listdir(DATASET_DIR))
-LOW_CONFIDENCE_THRESHOLD = 0.60  # di bawah ini, tampilkan warning "mungkin bukan apple/orange"
+LOW_CONFIDENCE_THRESHOLD = 0.80  # di bawah ini, tampilkan warning "mungkin bukan apple/orange"
 MAX_FILE_SIZE_MB = 5
 
 # Metrik dari notebook (hasil evaluate_model di test set)
