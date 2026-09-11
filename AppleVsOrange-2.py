@@ -87,7 +87,7 @@ def main():
             "ke salah satu dari dua kelas ini."
         )
 
-    st.title("🍎🍊 Klasifikasi Buah: Apple vs Orange")
+    st.title("🍎🍊 Klasifikasi Buah Apple & Orange")
     st.write(
         "Upload gambar buah (bisa lebih dari satu) "
         "**apple** atau **orange** menggunakan MobileNetV2 Transfer Learning."
