@@ -55,11 +55,13 @@ def render_result(image: Image.Image, filename: str):
     with st.spinner("Memprediksi..."):
         pred_class, confidence, pred_prob = predict(load_model(), image)
 
+    # Prediksi selalu ditampilkan, apa pun tingkat confidence-nya
     if confidence < LOW_CONFIDENCE_THRESHOLD:
         st.warning(
             f"⚠️ Model kurang yakin (confidence {confidence * 100:.2f}%). "
-            "Gambar mungkin bukan apple/orange, atau kualitas gambar kurang jelas. "
+            "Gambar mungkin bukan apple/orange, atau kualitas gambar kurang jelas."
         )
+        st.info(f"Prediksi tetap ditampilkan: **{pred_class.upper()}** (dengan keraguan)")
     else:
         st.success(f"Prediksi: **{pred_class.upper()}**")
 
