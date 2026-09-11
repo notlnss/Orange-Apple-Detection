@@ -61,7 +61,6 @@ def render_result(image: Image.Image, filename: str):
         st.warning(
             f"⚠️ Model kurang yakin (confidence {confidence * 100:.2f}%). "
             "Gambar mungkin bukan apple/orange, atau kualitas gambar kurang jelas. "
-            "Ingat, model ini hanya dilatih untuk 2 kelas: apple dan orange."
         )
     else:
         st.success(f"Prediksi: **{pred_class.upper()}**")
@@ -85,31 +84,42 @@ def main():
         st.caption(
             "⚠️ Model hanya mengenali 2 kelas: **apple** dan **orange**. "
             "Gambar buah lain atau objek non-buah tetap akan diklasifikasikan "
-            "ke salah satu dari dua kelas ini (dengan confidence yang biasanya rendah)."
+            "ke salah satu dari dua kelas ini."
         )
 
     st.title("🍎🍊 Klasifikasi Buah: Apple vs Orange")
     st.write(
-        "Upload gambar buah (bisa lebih dari satu), model akan memprediksi apakah itu "
+        "Upload gambar buah (bisa lebih dari satu) "
         "**apple** atau **orange** menggunakan MobileNetV2 Transfer Learning."
     )
 
-    uploaded_files = st.file_uploader(
-        "Upload gambar buah (jpg/png)",
-        type=["jpg", "jpeg", "png"],
-        accept_multiple_files=True,
-    )
+    tab_upload, tab_camera = st.tabs(["📁 Upload Gambar", "📷 Kamera"])
 
-    if uploaded_files:
-        for uploaded_file in uploaded_files:
-            if uploaded_file.size > MAX_FILE_SIZE_MB * 1024 * 1024:
-                st.error(f"❌ {uploaded_file.name} melebihi {MAX_FILE_SIZE_MB}MB, dilewati.")
-                continue
+    with tab_upload:
+        uploaded_files = st.file_uploader(
+            "Upload gambar buah (jpg/png)",
+            type=["jpg", "jpeg", "png"],
+            accept_multiple_files=True,
+        )
 
-            st.subheader(uploaded_file.name)
-            image = Image.open(uploaded_file)
-            render_result(image, uploaded_file.name)
-            st.write("---")
+        if uploaded_files:
+            for uploaded_file in uploaded_files:
+                if uploaded_file.size > MAX_FILE_SIZE_MB * 1024 * 1024:
+                    st.error(f"❌ {uploaded_file.name} melebihi {MAX_FILE_SIZE_MB}MB, dilewati.")
+                    continue
+
+                st.subheader(uploaded_file.name)
+                image = Image.open(uploaded_file)
+                render_result(image, uploaded_file.name)
+                st.write("---")
+
+    with tab_camera:
+        st.caption("Ambil foto langsung dari kamera (webcam di laptop, atau kamera HP).")
+        camera_file = st.camera_input("Foto buah")
+
+        if camera_file is not None:
+            image = Image.open(camera_file)
+            render_result(image, "Foto dari kamera")
 
 
 if __name__ == "__main__":
